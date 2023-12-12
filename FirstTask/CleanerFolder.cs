@@ -22,11 +22,7 @@ namespace FirstTask
         static void Clean(string path)
         {
             DirectoryInfo dir = new DirectoryInfo(path);
-            if (!dir.Exists)
-            {
-                Console.WriteLine($"[{path}] Данной папки не существует!");
-                return;
-            }
+            
             var files = dir.GetFiles();
             var directories = dir.GetDirectories();
             if (files.Length > 0)
