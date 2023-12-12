@@ -8,21 +8,28 @@ namespace FirstTask
 {
     public static class CleanerFolder
     {
+        static ConsoleColor _defCol = Console.ForegroundColor;
         public static void Run(string path)
         {
             if (!Directory.Exists(path))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"[{path}] Не верно указан путь!");
+                Console.ForegroundColor = _defCol;
+            }
             else
             {
                 Clean(path);
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Папка очищена!");
+                Console.ForegroundColor = _defCol;
             }
         }
 
         static void Clean(string path)
         {
             DirectoryInfo dir = new DirectoryInfo(path);
-            
+
             var files = dir.GetFiles();
             var directories = dir.GetDirectories();
             if (files.Length > 0)
