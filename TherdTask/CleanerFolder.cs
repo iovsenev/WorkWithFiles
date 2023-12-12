@@ -1,4 +1,4 @@
-﻿namespace FirstTask
+﻿namespace ThirdTask
 {
     public static class CleanerFolder
     {
@@ -6,25 +6,16 @@
         static int _countDelFile;
         public static void Run(string path)
         {
-            _countDelFile = 0;
-            if (!Directory.Exists(path))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"[{path}] Не верно указан путь!");
-                Console.ForegroundColor = _defCol;
-            }
-            else
-            {
-                Clean(path);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Папка очищена!");
-                Console.WriteLine("Удаленно {0} файлов", _countDelFile);
-                Console.ForegroundColor = _defCol;
-            }
+            Clean(path);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Папка очищена!");
+            Console.WriteLine("Удаленно {0} файлов", _countDelFile);
+            Console.ForegroundColor = _defCol;
         }
 
         static void Clean(string path)
         {
+            _countDelFile = 0;
             DirectoryInfo dir = new DirectoryInfo(path);
 
             var files = dir.GetFiles();
