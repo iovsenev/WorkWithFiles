@@ -10,7 +10,7 @@ namespace SecondTask
     {
         static decimal _volume;
         static ConsoleColor _defCol = Console.ForegroundColor;
-        public static void Run(string path)
+        public static decimal Run(string path)
         {
             if (!Directory.Exists(path))
             {
@@ -22,10 +22,8 @@ namespace SecondTask
             {
                 _volume = 0;
                 CountingVolume(path);
-                Console.ForegroundColor = ConsoleColor.Green;
-                Console.WriteLine("Текущий объем файлов: {0} байт.", _volume);
-                Console.ForegroundColor = _defCol;
             }
+            return _volume;
         }
 
         static void CountingVolume(string path)
