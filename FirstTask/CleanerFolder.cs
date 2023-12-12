@@ -9,6 +9,7 @@ namespace FirstTask
     public static class CleanerFolder
     {
         static ConsoleColor _defCol = Console.ForegroundColor;
+        static int _countDelFile;
         public static void Run(string path)
         {
             if (!Directory.Exists(path))
@@ -22,12 +23,14 @@ namespace FirstTask
                 Clean(path);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Папка очищена!");
+                Console.WriteLine("Удаленно {0} файлов", _countDelFile);
                 Console.ForegroundColor = _defCol;
             }
         }
 
         static void Clean(string path)
         {
+            _countDelFile = 0;
             DirectoryInfo dir = new DirectoryInfo(path);
 
             var files = dir.GetFiles();
@@ -78,13 +81,14 @@ namespace FirstTask
                     if (minutes.TotalMinutes > 30)
                     {
                         item.Delete();
+                        _countDelFile++;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("ex");
+                Console.WriteLine(ex);
                 Console.ForegroundColor = _defCol;
             }
 
