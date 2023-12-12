@@ -4,7 +4,8 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            string path = @"C:\Users\ovsen\OneDrive\Рабочий стол\TemporyFolder";
+            CleanerFolder.Run(path);
         }
     }
 }
