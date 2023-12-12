@@ -60,7 +60,9 @@ namespace FirstTask
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(ex);
+                Console.ForegroundColor = _defCol;
             }
         }
 
@@ -81,7 +83,9 @@ namespace FirstTask
             }
             catch (Exception ex)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("ex");
+                Console.ForegroundColor = _defCol;
             }
 
         }

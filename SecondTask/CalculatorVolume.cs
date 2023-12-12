@@ -9,14 +9,14 @@ namespace SecondTask
     public static class CalculatorVolume
     {
         static decimal _volume;
+        static ConsoleColor _defCol = Console.ForegroundColor;
         public static void Run(string path)
         {
-            var defCol = Console.ForegroundColor;
             if (!Directory.Exists(path))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine($"[{path}] Не верно указан путь!");
-                Console.ForegroundColor = defCol;
+                Console.ForegroundColor = _defCol;
             }
             else
             {
@@ -24,7 +24,7 @@ namespace SecondTask
                 CountingVolume(path);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Текущий объем файлов: {0} байт.", _volume);
-                Console.ForegroundColor = defCol;
+                Console.ForegroundColor = _defCol;
             }
         }
 
@@ -33,20 +33,29 @@ namespace SecondTask
             var dir = new DirectoryInfo(path);
             var files = dir.GetFiles();
             var directories = dir.GetDirectories();
-            if (files.Length > 0)
+            try
             {
-                foreach (var file in files)
+                if (files.Length > 0)
                 {
-                    _volume += file.Length;
+                    foreach (var file in files)
+                    {
+                        _volume += file.Length;
+                    }
+                }
+                if (directories.Length > 0)
+                {
+                    foreach (var directory in directories)
+                    {
+                        var nextPath = directory.FullName;
+                        CountingVolume(nextPath);
+                    }
                 }
             }
-            if (directories.Length > 0)
+            catch (Exception e)
             {
-                foreach (var directory in directories)
-                {
-                    var nextPath = directory.FullName;
-                    CountingVolume(nextPath);
-                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(e);
+                Console.ForegroundColor = _defCol;
             }
         }
     }
